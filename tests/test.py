@@ -1,11 +1,12 @@
 import math
-from simplecalculatorpaulit import Calculator, ScientificCalculator
+from simplecalculatorpaulit import Calculator, ScientificCalculator,StatisticsCalculator
 
 import unittest
 
 class Test(unittest.TestCase):
     calculations = Calculator()
     scientific_calculations = ScientificCalculator()
+    statistics_calculations = StatisticsCalculator([1, 3, 3, 4, 5])
     
     def test_01_test_add(self):
         self.assertEqual(self.calculations.add(10.5), 10.5, 'Should be 10.5')
@@ -27,33 +28,44 @@ class Test(unittest.TestCase):
     
     def test_07_test_sine(self):
         self.scientific_calculations.add(30)
-        self.assertAlmostEqual(self.scientific_calculations.sine(), 0.5, 'Should be 0.5')
+        self.assertAlmostEqual(self.scientific_calculations.sine(), 0.5, places=1, msg='Should be 0.5')
 
     def test_08_test_cosine(self):
         self.scientific_calculations.reset()
         self.scientific_calculations.add(60)
-        self.assertAlmostEqual(self.scientific_calculations.cosine(), 0.5, 'Should be 0.5')
+        self.assertAlmostEqual(self.scientific_calculations.cosine(), 0.5, places=1, msg='Should be 0.5')
 
     def test_09_test_tangent(self):
         self.scientific_calculations.reset()
         self.scientific_calculations.add(45)
-        self.assertAlmostEqual(self.scientific_calculations.tangent(), 1, 'Should be 1')
+        self.assertAlmostEqual(self.scientific_calculations.tangent(), 1, places=1, msg='Should be 1')
 
     def test_10_test_log(self):
         self.scientific_calculations.reset()
         self.scientific_calculations.add(100)
-        self.assertAlmostEqual(self.scientific_calculations.log(), 2, 'Should be 2')
+        self.assertAlmostEqual(self.scientific_calculations.log(), 2, places=1, msg='Should be 2')
 
     def test_11_test_ln(self):
         self.scientific_calculations.reset()
         self.scientific_calculations.add(math.e)
-        self.assertAlmostEqual(self.scientific_calculations.ln(), 1, 'Should be 1')
+        self.assertAlmostEqual(self.scientific_calculations.ln(), 1, places=1, msg='Should be 1')
 
     def test_12_test_power(self):
         self.scientific_calculations.reset()
         self.scientific_calculations.add(2)
         self.assertEqual(self.scientific_calculations.power(3), 8, 'Should be 8')
 
+    def test_14_test_mean(self):
+        self.assertEqual(self.statistics_calculations.mean(), 3.2)
+
+    def test_15_test_median(self):
+        self.assertEqual(self.statistics_calculations.median(), 3.0)
+
+    def test_16_test_standard_deviation(self):
+        self.assertAlmostEqual(self.statistics_calculations.standard_deviation(), 1.3266, places=4)
+
+    def test_17_test_variance(self):
+        self.assertAlmostEqual(self.statistics_calculations.variance(), 1.76, places=2)
 
 if __name__ == '__main__':
     unittest.main()

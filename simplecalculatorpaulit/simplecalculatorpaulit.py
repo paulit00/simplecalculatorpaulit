@@ -1,4 +1,5 @@
 import math
+from collections import Counter
 
 class Calculator:
     """Calculator class object whose methods do addition, subtraction, multiplication, division,
@@ -70,7 +71,7 @@ class Calculator:
         Takes n root of a current number in calculator memory.
         """
         if isinstance(n_root_of_a_number, (int, float)):
-            if self.result < 0 and n_root_of_a_number % 2 == 0:
+            if self.result < 0:
                 raise ValueError('Can not take even root out of negative numbers.')
             elif n_root_of_a_number == 0:
                 raise ZeroDivisionError('Error. Can not divide by 0.')
@@ -125,3 +126,54 @@ class ScientificCalculator(Calculator):
             return self.result
         else:
             raise ValueError('Exponent must be a real number')
+
+
+class StatisticsCalculator(Calculator):
+    """StatisticsCalculator class object that inherits from the Calculator class object.
+    It has additional methods for calculating mean, median, mode, standard deviation,
+    and variance of a list of numbers.
+    """
+    def __init__(self, numbers):
+        """Accepts a list of numbers.
+        Checks if all elements are real numbers and if not raises an error.
+        """
+        if all(isinstance(n, (int, float)) for n in numbers):
+            self.numbers = numbers
+        else:
+            raise ValueError('All elements must be real numbers')
+
+    def mean(self):
+        """Calculates the mean of the list of numbers."""
+        return sum(self.numbers) / len(self.numbers)
+
+    def median(self):
+        """Calculates the median of the list of numbers."""
+        sorted_numbers = sorted(self.numbers)
+        n = len(sorted_numbers)
+        midpoint = n // 2
+
+        if n % 2 == 1:
+            return sorted_numbers[midpoint]
+        else:
+            return (sorted_numbers[midpoint - 1] + sorted_numbers[midpoint]) / 2
+
+    def mode(self):
+        """Calculates the mode of the list of numbers."""
+        frequency = Counter(self.numbers)
+        mode_data = frequency.most_common()
+        max_count = mode_data[0][1]
+        modes = [num for num, count in mode_data if count == max_count]
+        if len(modes) == len(self.numbers):
+            return None  # No mode found
+        return modes
+
+    def standard_deviation(self):
+        """Calculates the standard deviation of the list of numbers."""
+        mean = self.mean()
+        variance = sum((x - mean) ** 2 for x in self.numbers) / len(self.numbers)
+        return math.sqrt(variance)
+
+    def variance(self):
+        """Calculates the variance of the list of numbers."""
+        mean = self.mean()
+        return sum((x - mean) ** 2 for x in self.numbers) / len(self.numbers)

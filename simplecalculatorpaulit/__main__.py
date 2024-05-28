@@ -1,5 +1,6 @@
 """Main module"""
-from simplecalculatorpaulit import Calculator, ScientificCalculator
+from simplecalculatorpaulit import Calculator, ScientificCalculator,StatisticsCalculator
+import numpy as np
 
 if __name__ == '__main__':
     calculator = Calculator()
@@ -9,3 +10,5 @@ if __name__ == '__main__':
     print(calculator.divide(3))
     print(calculator.root(2))
     print(calculator.reset())
+    arr = [1, 2, 3, 4, 5] 
+    print(np.mod(arr))
