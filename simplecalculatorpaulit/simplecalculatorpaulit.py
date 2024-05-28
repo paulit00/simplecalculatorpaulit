@@ -72,7 +72,7 @@ class Calculator:
         """
         if isinstance(n_root_of_a_number, (int, float)):
             if self.result < 0:
-                raise ValueError('Can not take even root out of negative numbers.')
+                raise ValueError('Can not take root out of negative numbers.')
             elif n_root_of_a_number == 0:
                 raise ZeroDivisionError('Error. Can not divide by 0.')
             else:
