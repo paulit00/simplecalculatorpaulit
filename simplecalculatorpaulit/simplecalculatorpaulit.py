@@ -1,3 +1,5 @@
+import math
+
 class Calculator:
     """Calculator class object whose methods do addition, subtraction, multiplication, division,
     takes n root of a number and resets the stored memory to the initial value.
@@ -77,3 +79,49 @@ class Calculator:
                 return self.result
         else:
             raise ValueError('Value has to be a real number')
+
+class ScientificCalculator(Calculator):
+    """ScientificCalculator class object that inherits from the Calculator class object.
+    It has additional methods for trigonometric functions, logarithms, power, and square
+    root.
+    """
+    def sine(self):
+        """Takes the sine of the current number in calculator memory."""
+        self.result = math.sin(math.radians(self.result))
+        return self.result
+
+    def cosine(self):
+        """Takes the cosine of the current number in calculator memory."""
+        self.result = math.cos(math.radians(self.result))
+        return self.result
+
+    def tangent(self):
+        """Takes the tangent of the current number in calculator memory."""
+        self.result = math.tan(math.radians(self.result))
+        return self.result
+
+    def log(self, base=10):
+        """Takes the logarithm of the current number in calculator memory.
+        Checks if the current number is <=0 because logarithm is undefined for non-positive values.
+        """
+        if self.result <= 0:
+            raise ValueError('Logarithm undefined for non-positive values.')
+        self.result = math.log(self.result, base)
+        return self.result
+
+    def ln(self):
+        """Takes the natural logarithm of the current number in calculator memory.
+        Checks if the current number is <=0 because logarithm is undefined for non-positive values.
+        """
+        if self.result <= 0:
+            raise ValueError('Logarithm undefined for non-positive values.')
+        self.result = math.log(self.result)
+        return self.result
+
+    def power(self, exponent):
+        """Raises the current number in calculator memory to the power of the given exponent."""
+        if isinstance(exponent, (int, float)):
+            self.result = self.result ** exponent
+            return self.result
+        else:
+            raise ValueError('Exponent must be a real number')

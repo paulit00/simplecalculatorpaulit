@@ -1,5 +1,5 @@
 """Main module"""
-from simplecalculatorpaulit import Calculator
+from simplecalculatorpaulit import Calculator, ScientificCalculator
 
 if __name__ == '__main__':
     calculator = Calculator()

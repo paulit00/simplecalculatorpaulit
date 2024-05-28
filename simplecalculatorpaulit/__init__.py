@@ -1,6 +1,6 @@
 """Calculator module"""
-from .simplecalculatorpaulit import Calculator
+from .simplecalculatorpaulit import Calculator, ScientificCalculator
 
-__version__ = "0.0.3"
+__version__ = "0.0.4"
 
 
